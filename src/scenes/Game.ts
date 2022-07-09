@@ -12,6 +12,7 @@ enum ImageKeys {
 export class Game extends Phaser.Scene {
   private player!: Phaser.Physics.Arcade.Sprite;
   private platforms!: Phaser.Physics.Arcade.StaticGroup;
+  private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
 
   constructor() {
     super('Game');
@@ -20,6 +21,7 @@ export class Game extends Phaser.Scene {
     this.load.image(ImageKeys.bg, background);
     this.load.image(ImageKeys.platform, platform);
     this.load.image(ImageKeys.bunnyStand, bunnyStand);
+    this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   create() {
@@ -45,7 +47,18 @@ export class Game extends Phaser.Scene {
 
   update() {
     const touchingDown = this.player.body.touching.down;
-    if (touchingDown) this.player.setVelocityY(isDev ? -1000 : -300);
+    // if (touchingDown) this.player.setVelocityY(isDev ? -1000 : -300);
+
+    if (this.cursors.left.isDown) {
+      this.player.setVelocityX(-400);
+    } else if (this.cursors.right.isDown) {
+      this.player.setVelocityX(400);
+    } else if (this.cursors.up.isDown && touchingDown) {
+      this.player.setVelocityY(-400);
+    } else {
+      // stop movement if not left or right
+      this.player.setVelocityX(0);
+    }
 
     this.player.body.checkCollision.up = false;
     this.player.body.checkCollision.left = false;
