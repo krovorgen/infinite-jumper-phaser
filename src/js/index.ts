@@ -3,7 +3,7 @@ import { Game } from '../scenes/Game';
 const WIDTH_GAME = 480;
 const HEIGHT_GAME = 640;
 
-const isDev = process.env.NODE_ENV === 'development';
+export const isDev = process.env.NODE_ENV === 'development';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
