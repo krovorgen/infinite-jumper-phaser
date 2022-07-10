@@ -1,4 +1,5 @@
 import { Game } from '../scenes/Game';
+import { GameOver } from '../scenes/GameOver';
 
 const WIDTH_GAME = 480;
 const HEIGHT_GAME = 640;
@@ -10,7 +11,7 @@ const config: Phaser.Types.Core.GameConfig = {
   width: WIDTH_GAME,
   height: HEIGHT_GAME,
   pixelArt: true,
-  scene: [Game],
+  scene: [Game, GameOver],
   physics: {
     default: 'arcade',
     arcade: {
